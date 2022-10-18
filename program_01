@@ -1,0 +1,55 @@
+#include<stdio.h>
+#include<string.h>                  // Input a Password from user which has : 1 Uppercase Alphabet, 1 Special Charecter & maximum length of password = 15.
+#include<stdlib.h>
+int checkMaxLength(char *);
+int checkCapLetter(char *);
+int checkSpecialChar(char *);
+
+void main(){
+    system("cls");
+    char password[100];
+    int checkMaximumLength,checkCapitalLetter,checkSpeCharecter;
+    AGAIN :printf("\nCreate a password\n");
+    scanf("%s",password);
+    checkMaximumLength = checkMaxLength(password);
+    if (checkMaximumLength == 0){
+        printf("Password length should be less than 16.");
+        goto AGAIN;
+    }
+    checkCapitalLetter = checkCapLetter(password);
+    if (checkCapitalLetter == 0){
+        printf("Password should contain a Uppercase Character.");
+        goto AGAIN;
+    }
+    checkSpeCharecter = checkSpecialChar(password);
+    if (checkSpeCharecter == 0){
+        printf("Password should contain a Special Character.");
+        goto AGAIN;
+    }
+    printf("Password Created !");
+}
+
+int checkMaxLength(char *password){
+    int maxLength = 15;
+    return(strlen(password) <= maxLength);
+}
+
+int checkCapLetter(char *password){
+    int flag = 0;
+    for (int i = 0; i < strlen(password); i++){
+        if (*(password + i) >= 'A' && *(password + i) <= 'Z'){
+            flag++;
+        }
+    }
+    return flag;
+}
+
+int checkSpecialChar(char *password){
+    int flag = 0;
+    for (int i = 0; i < strlen(password); i++){
+        if ((*(password + i) >= 32 && *(password + i) <= 47) || (*(password + i) >= 58 && *(password + i) <= 64) || (*(password + i) >= 91 && *(password + i) <= 96) || (*(password + i) >= 123 && *(password + i) <= 126)){
+            flag++;
+        }
+    }
+    return flag;
+}
