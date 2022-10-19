@@ -1,0 +1,36 @@
+#include<stdio.h>
+#include<string.h>          // Print number of spaces and number of special charecters in a sentence taken from user.
+#include<stdlib.h>
+void numberOfSpaces(char *);
+void numberOfSpecialChar(char *);
+
+void main(){
+    char *sentence;
+    sentence = (char *) malloc(1024 * sizeof(char));
+    printf("Enter a sentance :\n");
+    scanf("\n");
+    scanf("%[^\n]%*c",sentence);
+    numberOfSpaces(sentence); 
+    numberOfSpecialChar(sentence);
+    free(sentence);
+}
+
+void numberOfSpaces(char *sentence){
+    int count = 0,i;
+    for (i = 0; i < strlen(sentence); i++){
+        if (*(sentence + i) == 32){
+            count++;
+        }
+    }
+    printf("Number of spaces in the given sentence : %d",count);
+}
+
+void numberOfSpecialChar(char *sentence){
+    int count = 0,i;
+    for (i = 0; i < strlen(sentence); i++){
+        if ((*(sentence + i) > 32 && *(sentence + i) <= 47) || (*(sentence + i) >= 58 && *(sentence + i) <= 64) || (*(sentence + i) >= 91 && *(sentence + i) <= 96) || (*(sentence + i) >= 123 && *(sentence + i) <= 126)){
+            count++;
+        }
+    }
+    printf("\nNumber of special charecters in the given sentence : %d",count);
+}
